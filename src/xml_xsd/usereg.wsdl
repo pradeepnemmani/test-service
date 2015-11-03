@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://register.ws.d2d.com/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+
+                  targetNamespace="http://register.ws.d2d.com/">
+   <wsdl:types>
+       <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.users.com/schemas/org" xmlns:tns="http://www.users.com/schemas/org" elementFormDefault="qualified"  version="1.0">
+           <xs:include schemaLocation="user.xsd"/>
+       </xs:schema>
+   </wsdl:types>
+
+
+    <wsdl:message name="saveUser">
+        <wsdl:part element="user" name="saveUser">
+
+        </wsdl:part>
+    </wsdl:message>
+
+    <wsdl:message name="saveUserResponse">
+        <wsdl:part name="saveUserResponse" element="message"/>
+    </wsdl:message>
+
+    <wsdl:message name="getUsers">
+        <wsdl:part name="getUsers" element="usersRequest">
+        </wsdl:part>
+    </wsdl:message>
+
+    <wsdl:message name="getUsersResponse">
+        <wsdl:part name="getUsersResponse" element="users"/>
+
+    </wsdl:message>
+
+    <wsdl:portType name="IUserStorage">
+        <wsdl:operation name="saveUser">
+            <wsdl:input message="saveUser" name="saveUser"/>
+            <wsdl:output message="saveUserResponse" name="saveUserResponse"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="getUsers">
+            <wsdl:input message="getUsers" name="getUsers"/>
+            <wsdl:output message="getUsersResponse" name="getUsersResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+
+    <wsdl:binding name="IUserStorageBindings" type="tns:IUserStorage">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="saveUser">
+            <soap:operation style="document" soapAction=""/>
+            <wsdl:input name="saveUser">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="saveUserResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getUsers">
+            <soap:operation style="document" soapAction=""/>
+            <wsdl:input name="getUsers">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getUsersResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="IUserStorageService">
+        <wsdl:port name="IUserStorageServices" binding="IUserStorageBindings">
+            <soap:address location="http://localhost:8080/userStorage"/>
+        </wsdl:port>
+    </wsdl:service>
+
+    </wsdl:definitions>

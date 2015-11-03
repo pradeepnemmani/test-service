@@ -1,0 +1,49 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:as="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.users.com/schemas/org" xmlns="http://www.users.com/schemas/org"
+           xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+           jxb:version="2.0"
+           elementFormDefault="qualified">
+    <xs:element name="user" type="User"/>
+    <xs:element name="message" type="xs:string"/>
+
+    <xs:element name="users" type="Users"/>
+    <xs:element name="usersRequest" type="xs:string"/>
+
+
+    <xs:complexType name="User">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string" minOccurs="1"/>
+            <xs:element name="password" type="xs:string" minOccurs="1"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element  name="age" type="xs:integer"/>
+            <xs:element name="gender">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="male"/>
+                        <xs:enumeration value="female"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="address" type="Address"/>
+            <xs:element name="contactNo" type="xs:string"/>
+
+        </xs:sequence>
+
+    </xs:complexType>
+    <xs:complexType name="Address">
+        <xs:sequence>
+            <xs:element name="plotNo" type="xs:string" />
+            <xs:element name="area" type="xs:string"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="state" type="xs:string"/>
+            <xs:element name="country" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Users">
+        <xs:sequence>
+            <xs:element name="users" type="User" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    </xs:schema>
